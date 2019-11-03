@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 // import './style.css'
 import { Button, InputItem, WingBlank, WhiteSpace, List } from 'antd-mobile'
 import { connect } from 'react-redux'
-// import { login } from '@/store/reducer/user'
-import { login, errorMsg } from '../../store/reducer/user'
+import { login, errorMsg } from '@/store/reducer/user'
 
 @connect(
     state => state.user,
@@ -26,7 +25,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                { this.props.state }
+                aa: { this.props.state }
                 <WingBlank>
 					<List>
 						<InputItem
