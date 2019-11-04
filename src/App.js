@@ -7,7 +7,6 @@ import './App.css';
 
 import { Dashboard, Login } from './view'
 
-
 function App() {
   return (
     <div className="App">

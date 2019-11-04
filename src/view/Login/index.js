@@ -20,7 +20,7 @@ class Login extends Component {
     }
     handleRegister(){
         this.props.errorMsg('sdfsdf')
-        console.log(this.props.user.user)
+        console.log(this.props)
     }
 
     render() {
