@@ -1,17 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux' 
-import thunk from 'redux-thunk'
-import reducers from './store'
+import store from './store'
 
 import './App.css';
 
 import { Dashboard, Login } from './view'
 
-const store = createStore(reducers, compose(
-  applyMiddleware(thunk)
-))
 
 function App() {
   return (

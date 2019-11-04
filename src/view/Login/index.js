@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { login, errorMsg } from '@/store/reducer/user'
 
 @connect(
-    state => state.user,
+    state => ({ user: state.user }),
     {login, errorMsg}
 )
 class Login extends Component {
@@ -20,12 +20,13 @@ class Login extends Component {
     }
     handleRegister(){
         this.props.errorMsg('sdfsdf')
+        console.log(this.props.user.user)
     }
 
     render() {
         return (
             <div>
-                aa: { this.props.state }
+                {/* aa: { this.props } */}
                 <WingBlank>
 					<List>
 						<InputItem
@@ -41,7 +42,7 @@ class Login extends Component {
 					<WhiteSpace />
 					<Button type='primary' onClick={this.handleLogin}>login</Button>
 					<WhiteSpace />
-					<Button onClick={this.register} type='primary'>注册</Button>
+					<Button onClick={this.handleRegister} type='primary'>注册</Button>
 				</WingBlank>
                 
             </div>
