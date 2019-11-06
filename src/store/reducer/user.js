@@ -53,8 +53,8 @@ export function login({user, pwd}){
         //         }
         //     }))
         // },1000)
-        http.post("/register", { account: "lnimsdfisd",
-        password: "123123" },{ "Content-Type": "application/x-www-form-urlencoded" }).then(res=>{
+        http.post("/register", { account: "aaa",
+        password: "123123" },{ headers:{"Content-Type": "application/x-www-form-urlencoded" }}).then(res=>{
             console.log(res)
         }).catch(e=>{
             console.warn(e)
