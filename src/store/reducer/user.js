@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import http from '@/http'
 
 const initState = {
     type: '',
@@ -32,9 +32,9 @@ export function errorMsg(msg){
     return {type: types.LODA_ERROR, payload: {type: 0, msg}}
 }
 
-function loginSuccess(info){
-    return {type: types.LOGIN_SUCCESS, payload: info}
-}
+// function loginSuccess(info){
+//     return {type: types.LOGIN_SUCCESS, payload: info}
+// }
 
 
 export function login({user, pwd}){
@@ -43,15 +43,22 @@ export function login({user, pwd}){
     }
 
     return dispatch=>{
-        setTimeout(function(){
-            dispatch(loginSuccess({
-                type:1,
-                msg: 'success',
-                user:{
-                    name: 'manny',
-                    age: 23
-                }
-            }))
-        },1000)
+        // setTimeout(function(){
+        //     dispatch(loginSuccess({
+        //         type:1,
+        //         msg: 'success',
+        //         user:{
+        //             name: 'manny',
+        //             age: 23
+        //         }
+        //     }))
+        // },1000)
+        http.post("/register", { account: "lnimsdfisd",
+        password: "123123" },{ "Content-Type": "application/x-www-form-urlencoded" }).then(res=>{
+            console.log(res)
+        }).catch(e=>{
+            console.warn(e)
+        })
+
     }
 }
