@@ -50,8 +50,11 @@ http.interceptors.request.use(config=>{
 })
 
 http.interceptors.response.use(response=>{
+    if(response.headers['content-type'].indexOf('application/json') > -1){
+        response.data = JSON.parse(response.data)
+    }
     // 根据response.data.code 来做不同的处理
-    if(response.data.code !== 1){
+    if(response.data.code !== 0){
         console.log('interface failed')
     }
     return response

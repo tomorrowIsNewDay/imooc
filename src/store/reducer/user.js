@@ -53,9 +53,9 @@ export function login({user, pwd}){
         //         }
         //     }))
         // },1000)
-        http.post("/register", { account: "aaa",
+        http.post("/login", { account: "nini",
         password: "123123" },{ headers:{"Content-Type": "application/x-www-form-urlencoded" }}).then(res=>{
-            console.log(res)
+            console.log(res.data, typeof res.data)
         }).catch(e=>{
             console.warn(e)
         })

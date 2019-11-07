@@ -19,12 +19,23 @@
     if(!user){
         ctx.status = 200
         ctx.body = {
-            code: 0,
+            code: 1,
             msg: 'account or password error'
         }
         return
     }
-    const userId = user.userId
+    // const userId = user.userId
+    // ctx.set('X-Response-Time', `12ms`);
+    // ctx.set('Content-Type', 'text/html')
+
+    // ctx.set("Content-Type", "application/json")
+    // ctx.response.type = 'application/json'
+    ctx.status = 200
+    ctx.body = {
+        code: 0,
+        user: user
+    }
+
  }
 
  /** 注册 */
@@ -37,7 +48,7 @@
      ctx.status = 200
      if(user){
          ctx.body = {
-             code: 0,
+             code: 1,
              msg: 'account repeat'
          }
          return
@@ -56,11 +67,18 @@
              userId,
              password: req.password
          })
+         
          if(result){
+             
              ctx.body = {
-                 code: 1,
+                 code: 0,
                  msg: '注册成功',
+                 data: {
+                    account: req.account,
+                    pwd: req.password
+                }
              }
+             
          }
      }
 
