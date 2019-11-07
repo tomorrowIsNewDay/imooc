@@ -33,13 +33,13 @@ export function errorMsg(msg){
     return {type: types.LODA_ERROR, payload: {type: 0, msg}}
 }
 
-// function loginSuccess(info){
-//     return {type: types.LOGIN_SUCCESS, payload: info}
-// }
+function loginSuccess(info){
+    return {type: types.LOGIN_SUCCESS, payload: info}
+}
 
 
-export function login({user, pwd}){
-    if(!user || !pwd){
+export function login({account, password}){
+    if(!account || !password){
         return errorMsg('请输入账号密码！')
     }
 
@@ -54,9 +54,13 @@ export function login({user, pwd}){
         //         }
         //     }))
         // },1000)
-        http.post("/login", { account: "nini",
-        password: "123123" },{ headers:{"Content-Type": "application/x-www-form-urlencoded" }}).then(res=>{
+        http.post("/login", 
+            { account, password },
+            { headers:{"Content-Type": "application/x-www-form-urlencoded" }}).then(res=>{
             console.log(res.data, typeof res.data)
+            dispatch(loginSuccess({
+                data: res.data
+            }))
         }).catch(e=>{
             console.warn(e)
         })
