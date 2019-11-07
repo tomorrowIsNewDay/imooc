@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import './style.css'
 import { Button, InputItem, WingBlank, WhiteSpace, List } from 'antd-mobile'
+import { Logo } from '@/component'
 import { connect } from 'react-redux'
 import { login, errorMsg } from '@/store/reducer/user'
 
@@ -26,7 +27,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                {/* aa: { this.props } */}
+                <Logo />
                 <WingBlank>
 					<List>
 						<InputItem

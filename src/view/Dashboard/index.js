@@ -5,6 +5,7 @@ import { Button } from 'antd-mobile'
 class Dashboard extends Component {
     
     render() {
+        console.log(this.props, 'dashboard')
         return (
             <div>
                 <h2>页面</h2>

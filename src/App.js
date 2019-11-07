@@ -7,14 +7,12 @@ import './App.css';
 
 import { Dashboard, Login } from './view'
 
-// function NotFound(props){
-//   return (
-//     <h2>NotFound {props.match.params.location}</h2>
-//   )
-// }
-function NotFound1(){
+// 鉴权路由组件
+import { AuthRoute } from '@/component'
+
+function NotFound(props){
   return (
-    <h2>NotFound </h2>
+    <h2> {props.match.params.location} : 页面404  </h2>
   )
 }
 
@@ -24,10 +22,11 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
+            <AuthRoute path='/dashboard' component={Dashboard}/>
             <Route path='/login' component={Login}/>
-            <Route path='/dashboard' component={Dashboard}/>
             {/* <Route path='/:location' component={NotFound}/> */}
-            <Redirect to='/404' component={NotFound1}/>
+            <Route path='/404' component={NotFound}/>
+            <Redirect to='/404'/>
           </Switch>
         </BrowserRouter>
       </Provider>

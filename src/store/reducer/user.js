@@ -1,6 +1,7 @@
 import http from '@/http'
 
 const initState = {
+    isLogin: false,
     type: '',
     msg: '',
     user: {}

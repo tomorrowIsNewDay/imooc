@@ -8,6 +8,8 @@ import axios from 'axios'
 import baseconfig from './config'
 import qs from 'qs'
 
+import { Toast } from 'antd-mobile'
+
 // 创建axios实例
 const http = axios.create({
     baseURL: baseconfig.baseURL,
@@ -18,6 +20,7 @@ const http = axios.create({
 // 设置拦截器
 http.interceptors.request.use(config=>{
     // 加上loading
+    Toast.loading('Loading...');
     // 验证 token
     // 根据请求方法，处理参数（序列化）
     if(!config.headers['Content-Type']) {
@@ -43,13 +46,15 @@ http.interceptors.request.use(config=>{
     }
     return config
 }, error=>{
-    // 关闭loading
+    
     // 处理错误情况，重定向
 
     return Promise.reject(error)
 })
 
 http.interceptors.response.use(response=>{
+    // 关闭loading
+    Toast.hide()
     if(response.headers['content-type'].indexOf('application/json') > -1){
         response.data = JSON.parse(response.data)
     }
@@ -59,6 +64,8 @@ http.interceptors.response.use(response=>{
     }
     return response
 }, err => {
+    // 关闭loading
+    Toast.hide()
     // 处理错误情况
     // err.response.status 
     return Promise.reject(err)
