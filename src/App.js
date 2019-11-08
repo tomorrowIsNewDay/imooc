@@ -5,7 +5,7 @@ import store from './store'
 
 import './App.css';
 
-import { Dashboard, Login } from './view'
+import { Dashboard, Login, Register } from './view'
 
 // 鉴权路由组件
 import { AuthRoute } from '@/component'
@@ -24,6 +24,7 @@ function App() {
           <Switch>
             <AuthRoute path='/dashboard' component={Dashboard}/>
             <Route path='/login' component={Login}/>
+            <Route path='/register' component={Register}/>
             {/* <Route path='/:location' component={NotFound}/> */}
             <Route path='/404' component={NotFound}/>
             <Redirect to='/404'/>

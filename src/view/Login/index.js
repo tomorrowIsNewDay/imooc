@@ -3,11 +3,11 @@ import React, { Component } from 'react'
 import { Button, InputItem, WingBlank, WhiteSpace, List } from 'antd-mobile'
 import { Logo } from '@/component'
 import { connect } from 'react-redux'
-import { login, errorMsg } from '@/store/reducer/user'
+import { login, emitErrorMsg } from '@/store/reducer/user'
 
 @connect(
     state => state.user,
-    {login, errorMsg}
+    {login, emitErrorMsg}
 )
 class Login extends Component {
     constructor(props){
@@ -26,7 +26,7 @@ class Login extends Component {
         this.props.login(this.state)
     }
     handleRegister(){
-        this.props.errorMsg('sdfsdf')
+        this.props.emitErrorMsg('sdfsdf')
         console.log(this.props)
     }
 
