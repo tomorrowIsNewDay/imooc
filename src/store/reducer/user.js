@@ -1,4 +1,5 @@
 import http from '@/http'
+import { getRedirectPatch } from '@/utils'
 
 const initState = {
     isLogin: false,
@@ -19,11 +20,9 @@ const types = {
 export function user (state=initState, action){
     switch(action.type){
         case types.AUTH_SUCCESS:
-            return {...state, ...{type: 1, msg: 'success',user: {name: 'liming'}}}
+            return {...state, msg: '', redirectTo: getRedirectPatch(action.payload), ...action.payload}
         case types.LODA_ERROR:
-            return {...state, ...action.payload}   
-        case types.LOGIN_SUCCESS:
-            return {...state, ...action.payload}        
+            return {...state, isLogin: false, msg: action.msg}       
         case types.LOGOUT: 
             return {...initState}   
         default:
@@ -32,15 +31,20 @@ export function user (state=initState, action){
 }
 //*****actions createrfn */
 export function emitErrorMsg(msg){
-    return {type: types.LODA_ERROR, payload: {type: 0, msg}}
+    return {type: types.LODA_ERROR, msg}
 }
 
-function loginSuccess(info){
-    return {type: types.LOGIN_SUCCESS, payload: info}
-}
+// function loginSuccess(info){
+//     return {type: types.LOGIN_SUCCESS, payload: info}
+// }
 
-function registerSuccess(data){
-	return { type: types.REGISTER_SUCCESS, payload:data}
+// function registerSuccess(data){
+// 	return { type: types.REGISTER_SUCCESS, payload:data}
+// }
+
+function authSuccess(obj){
+    const {password, ...data} = obj
+    return { type: types.AUTH_SUCCESS, payload: data }
 }
 
 /** 注册 */
@@ -56,7 +60,7 @@ export function regisger({account, password, repeatpwd, type}){
             {account, password, type})
                 .then(res => {
                 if(res.data.code === 0){
-                    dispatch( registerSuccess(res.data) )
+                    dispatch( authSuccess(res.data.data) )
                 }else{
                     dispatch( emitErrorMsg(res.data.msg) )
                 }
@@ -71,26 +75,35 @@ export function login({account, password}){
     }
 
     return dispatch=>{
-        // setTimeout(function(){
-        //     dispatch(loginSuccess({
-        //         type:1,
-        //         msg: 'success',
-        //         user:{
-        //             name: 'manny',
-        //             age: 23
-        //         }
-        //     }))
-        // },1000)
         http.post("/api/login", 
             { account, password },
             { headers:{"Content-Type": "application/x-www-form-urlencoded" }}).then(res=>{
-            console.log(res.data, typeof res.data)
-            dispatch(loginSuccess({
-                data: res.data
-            }))
+            if(res.data.code === 0) {
+                dispatch(authSuccess(res.data.data))
+            }else{
+                dispatch(emitErrorMsg(res.data.msg))
+            }
+            
         }).catch(e=>{
             console.warn(e)
         })
 
+    }
+}
+
+// 更新信心
+export function update(data) {
+    return dispatch => {
+        http.post("/api/user/update", 
+            data).then(res=>{
+                if(res.data.code === 0){
+                    dispatch(authSuccess(res.data.data))
+                }else{
+                    dispatch(emitErrorMsg(res.data.msg))
+                }
+            
+        }).catch(e=>{
+            console.warn(e)
+        })
     }
 }

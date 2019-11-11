@@ -5,11 +5,12 @@ import store from './store'
 
 import './App.css';
 
-import { Dashboard, Login, Register } from './view'
+import { Dashboard, Login, Register, BossInfo, GeniusInfo } from './view'
 
 // 鉴权路由组件
-import { AuthRoute, 
-  // ComRoute 
+import { 
+  // AuthRoute, 
+  // PrivateRoute 
 } from '@/component'
 
 function NotFound(props){
@@ -25,9 +26,11 @@ function App() {
         <BrowserRouter>
           {/* <AuthRoute /> */}
           <Switch>
-            {/* <ComRoute path='/dashboard' component={Dashboard}/> */}
+            {/* <PrivateRoute path='/dashboard' component={Dashboard}/> */}
             <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
+            <Route path='/bossinfo' component={BossInfo}></Route>
+					  <Route path='/geniusinfo' component={GeniusInfo}></Route>
             <Route component={Dashboard} />
             {/* <Route path='/:location' component={NotFound}/> */}
             <Route path='/404' component={NotFound}/>

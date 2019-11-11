@@ -130,9 +130,15 @@ const _createHash = function(password){
 
  }
 
+ // 更新用户信息
+ const updateUser = async(ctx, next) => {
+
+ }
+
  module.exports = {
      login,
      register,
      getAuthInfo,
      getList,
+     updateUser,
  }

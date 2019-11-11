@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 @connect(
     state => state.user
 )
-class ComRoute extends React.Component {
+class PrivateRoute extends React.Component {
     render(){
         const {isLogin, component: Component, ...rest} = this.props
         return (
@@ -23,4 +23,4 @@ class ComRoute extends React.Component {
     }
 }
 
-export default ComRoute
+export default PrivateRoute
