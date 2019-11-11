@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const mongoose = require('mongoose')
 const bodyParser = require('koa-bodyparser')
+// const cookieParser = require('cookie-parser')
 const config = require('./config')
 
 const app = new Koa()
@@ -15,6 +16,7 @@ mongoose.connect(config.db, {useNewUrlParser: true}, err=>{
     }
 })
 
+// app.use(cookieParser())
 app.use(bodyParser())
 
 app.use(user_router.routes()).use(user_router.allowedMethods())

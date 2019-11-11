@@ -9,13 +9,39 @@
  const UserModel = new Schema({
      userId: {
          type: String,
-         unique: true,
+        //  unique: true,
+        //  required: true
+     },
+     // 账号
+     account: {
+        type: String,
+        required: true
+     },
+     // 密码
+     password: {
+         type: String,
          required: true
      },
-     account: {
+     type: {
+         type: String,
+         required: true
+     },
+     avatar: {
+         type: String,
+     },
+     // 简介
+     desc: {
         type: String
      },
-     userName: {
+     // 职位名
+     title: {
+         type: String
+     },
+     // boss 还有两个字段
+     company: {
+         type: String
+     },
+     money: {
          type: String
      }
     },

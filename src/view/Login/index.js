@@ -26,8 +26,7 @@ class Login extends Component {
         this.props.login(this.state)
     }
     handleRegister(){
-        this.props.emitErrorMsg('sdfsdf')
-        console.log(this.props)
+        this.props.history.push('/register')
     }
 
     handleChange(prop, val){

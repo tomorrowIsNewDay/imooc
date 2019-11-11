@@ -8,7 +8,9 @@ import './App.css';
 import { Dashboard, Login, Register } from './view'
 
 // 鉴权路由组件
-import { AuthRoute } from '@/component'
+import { AuthRoute, 
+  // ComRoute 
+} from '@/component'
 
 function NotFound(props){
   return (
@@ -21,10 +23,12 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <BrowserRouter>
+          {/* <AuthRoute /> */}
           <Switch>
-            <AuthRoute path='/dashboard' component={Dashboard}/>
+            {/* <ComRoute path='/dashboard' component={Dashboard}/> */}
             <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
+            <Route component={Dashboard} />
             {/* <Route path='/:location' component={NotFound}/> */}
             <Route path='/404' component={NotFound}/>
             <Redirect to='/404'/>
