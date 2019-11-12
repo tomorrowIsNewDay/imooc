@@ -24,7 +24,7 @@ http.interceptors.request.use(config=>{
     // 验证 token
     // 根据请求方法，处理参数（序列化）
     if(!config.headers['Content-Type']) {
-        config.headers['Content-Type'] = baseconfig.headers
+        config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     }
     if(config.url !== '/login') {
         config.headers['my_token'] = window.localStorage.getItem('my_token')
@@ -37,13 +37,16 @@ http.interceptors.request.use(config=>{
             config.url = config.url + '?' + config.data + '&_t=' + new Date().getTime()
         }
     }
-
-    if( config.method.toLocaleLowerCase() === 'post' ||
-        config.method.toLocaleLowerCase() === 'put' ||
-        config.method.toLocaleLowerCase() === 'delete'
-    ) {
+    if(config.headers['Content-Type'] === 'application/x-www-form-urlencoded' && (typeof config.data) !== 'string') {
         config.data = qs.stringify(config.data)
     }
+
+    // if( config.method.toLocaleLowerCase() === 'post' ||
+    //     config.method.toLocaleLowerCase() === 'put' ||
+    //     config.method.toLocaleLowerCase() === 'delete'
+    // ) {
+    //     config.data = qs.stringify(config.data)
+    // }
     return config
 }, error=>{
     

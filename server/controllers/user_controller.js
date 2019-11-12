@@ -16,8 +16,7 @@ const _createHash = function(password){
     const hash = crypto.createHmac('sha256', password)
                         .update(SECRET)
                         .update(SECRET)
-                        .digest('hex');
-    console.log(hash, 'hhhhahshdhsfhs')                    
+                        .digest('hex');                   
     return hash
 } 
 /** 鉴权 */
@@ -46,7 +45,7 @@ const _createHash = function(password){
  }
 // test
  const getList = async(ctx, next) => {
-     await user_model.remove({})
+    //  await user_model.remove({})
      const list = await user_model.find({})
      if(!list){
          ctx.body = {
@@ -62,7 +61,7 @@ const _createHash = function(password){
  /** 登录 */
  const login = async(ctx, next) => {
     const req = ctx.request.body
-
+    console.log(JSON.stringify(ctx, 2, 2))
     const user = await user_model.findOne({
         account: req.account,
         password: _createHash(req.password)
@@ -88,7 +87,7 @@ const _createHash = function(password){
  const register = async(ctx, next) => {
      const req = ctx.request.body
      const { account, type, password } = req
-
+    console.log(req, 'reqqqqq')
      const user = await user_model.findOne({
         account
      })
@@ -102,12 +101,14 @@ const _createHash = function(password){
      }
 
      // 插入新用户
-     // const userId = uuidv1()
+    //  const _id = uuidv1()
      let newUser = await user_model.create({
         account,
-        password,
+        password: _createHash(password),
         type,
+        // _id,
      })
+     
      //插入成功
      if(newUser){
         ctx.cookies.set('userId', newUser._id)

@@ -53,9 +53,9 @@ class Login extends Component {
 						>密码</InputItem>
 					</List>
 					<WhiteSpace />
-					<Button type='primary' onClick={this.handleLogin}>login</Button>
+					<Button type='primary' onClick={this.handleLogin}>登录</Button>
 					<WhiteSpace />
-					<Button onClick={this.handleRegister} type='primary'>注册</Button>
+                    <span>还未注册 <a onClick={this.handleRegister} style={{color: '#108ee9'}}>去注册</a></span>
 				</WingBlank>
                 
             </div>

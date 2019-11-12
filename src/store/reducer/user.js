@@ -76,8 +76,8 @@ export function login({account, password}){
 
     return dispatch=>{
         http.post("/api/login", 
-            { account, password },
-            { headers:{"Content-Type": "application/x-www-form-urlencoded" }}).then(res=>{
+            { account, password })
+            .then(res=>{
             if(res.data.code === 0) {
                 dispatch(authSuccess(res.data.data))
             }else{
