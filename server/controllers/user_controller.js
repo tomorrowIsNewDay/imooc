@@ -79,7 +79,7 @@ const _createHash = function(password){
     ctx.cookies.set('userId', user._id)
     ctx.body = {
         code: 0,
-        user: user
+        data: user
     }
  }
 
@@ -87,7 +87,6 @@ const _createHash = function(password){
  const register = async(ctx, next) => {
      const req = ctx.request.body
      const { account, type, password } = req
-    console.log(req, 'reqqqqq')
      const user = await user_model.findOne({
         account
      })
@@ -133,6 +132,8 @@ const _createHash = function(password){
 
  // 更新用户信息
  const updateUser = async(ctx, next) => {
+    const userId = req.cookies.userId
+    console.log(userId, 'userId')
 
  }
 

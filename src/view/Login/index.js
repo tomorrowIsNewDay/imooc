@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 import { Button, InputItem, WingBlank, WhiteSpace, List } from 'antd-mobile'
 import { Logo } from '@/component'
 import { connect } from 'react-redux'
-import { login, emitErrorMsg } from '@/store/reducer/user'
+import { Redirect } from 'react-router-dom'
+import { login } from '@/store/reducer/user'
 
 @connect(
     state => state.user,
-    {login, emitErrorMsg}
+    {login}
 )
 class Login extends Component {
     constructor(props){
@@ -40,6 +41,7 @@ class Login extends Component {
     render() {
         return (
             <div>
+                { this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : '' }
                 <Logo />
                 <WingBlank>
 					<List>
