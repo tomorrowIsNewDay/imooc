@@ -37,7 +37,7 @@ class UserCenter extends Component {
             <div>
                 <Result
                     img={<img src={require(`@/assets/avatars/${props.avatar}.png`)} style={{width: 50}} />}
-                    title={props.user}
+                    // title={props.user}
                     message={props.type === 'boss' ? props.company : null}
                 /> 
                 <List renderHeader={() => '简介'}>
