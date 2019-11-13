@@ -58,10 +58,27 @@ const _createHash = function(password){
      ctx.body = JSON.stringify(list, 2, 2)
  }
 
+ /** 获取用户列表 */
+ const getUserList = async(ctx, next) => {
+    const type = ctx.request.query.type
+    const list = await user_model.find({type})
+    if(!list){
+        ctx.status = 500
+        ctx.body = {
+            code: 1,
+            msg: 'server error'
+        }
+        return
+    }
+    ctx.body = {
+        code: 0,
+        data: list
+    }
+ }
+
  /** 登录 */
  const login = async(ctx, next) => {
     const req = ctx.request.body
-    console.log(JSON.stringify(ctx, 2, 2))
     const user = await user_model.findOne({
         account: req.account,
         password: _createHash(req.password)
@@ -132,9 +149,33 @@ const _createHash = function(password){
 
  // 更新用户信息
  const updateUser = async(ctx, next) => {
-    const userId = req.cookies.userId
-    console.log(userId, 'userId')
-
+    const cookies = ctx.request.headers.cookie
+    // 获取 cookie中的userId, 待优化，应使用token
+    const userId = cookies.split(';')[2].split('=')[1]
+    
+    if(!userId){
+        ctx.body = {
+            code: 1,
+            msg: 'not fond cookie'
+        }
+        return
+    }
+    const body = ctx.request.body
+    // 更新用户信息
+    const data = await user_model.findByIdAndUpdate({'_id': userId}, body)
+    console.log(data, '3232', userId)
+    if(!data){
+        ctx.status = 500
+        ctx.body = {
+            code: 1,
+            msg: 'server error'
+        }
+        return
+    }
+    ctx.body = {
+        code: 0,
+        data
+    }
  }
 
  module.exports = {
@@ -143,4 +184,5 @@ const _createHash = function(password){
      getAuthInfo,
      getList,
      updateUser,
+     getUserList,
  }

@@ -17,4 +17,6 @@ router.post('/api/user/update', user_controller.updateUser)
 //test
 router.get('/api/list', user_controller.getList)
 
+router.get('/api/user/list', user_controller.getUserList)
+
 module.exports = router

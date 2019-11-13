@@ -17,6 +17,42 @@ const http = axios.create({
     transformResponse: [function (data){return data}]
 })
 
+/**  
+ * 刷新 token
+ * 取到当前的token，通过过期事件判断是否过期（后台的过期时间为2小时）
+ * 在设定时间内要刷新token（0.5小时，发送刷新token请求）
+ */
+const refreshToken = ( config ) => {
+    // let tokenObj = window.localStorage.getItem ( 'token' )
+    // let isRefrash = _vue.$store.state.account.isRefrash
+    // let refrashTimes = _vue.$store.state.account.refrashTimes
+    // if ( tokenObj === null || tokenObj === '' )
+    //   return config
+  
+    // tokenObj = JSON.parse ( tokenObj )
+    // if ( tokenObj.token === undefined || tokenObj.sessionToken === undefined || tokenObj.timestamp === undefined ||
+    //   tokenObj.expireAt === undefined || tokenObj.token === null || tokenObj.timestamp === null || tokenObj.timestamp === '' )
+    //   return config
+  
+    // let curr = new Date ().getTime ()
+    // let expire = tokenObj.expireAt - curr
+    // let expireHour = ( ( expire / 1000 ) / 60 ) / 60
+    // // 过期了
+    // if ( expire <= 0 ) {
+    //   window.localStorage.removeItem ( 'token' )
+    //   _vue.$router.push ( {path: '/'} )
+    // // 在设定时间之内要过期的刷新accessToken
+    // } else if ( expireHour < limit.REFRASH_EXPIRES && !isRefrash ) {
+    //   // 小于设置最大请求次 避免死循环
+    //   if ( refrashTimes < limit.MAX_REFRASH_TOKEN_TIME ) {
+    //     _vue.$store.dispatch ( 'account/refreshAccessToken', { sessionToken: tokenObj.sessionToken, userId: tokenObj.userId } )
+    //   }
+    // }
+  
+    // return config
+  
+  }
+
 // 设置拦截器
 http.interceptors.request.use(config=>{
     // 加上loading

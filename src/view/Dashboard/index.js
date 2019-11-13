@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { NavBar } from 'antd-mobile'
 
-import { Boss, Genius, User, Msg } from '@/component'
+import { Boss, Genius, UserCenter, Msg, NavLinkBar } from '@/component'
 
 @connect(
     state => state
@@ -44,7 +44,7 @@ class Dashboard extends Component {
 				text:'我',
 				icon:'user',
 				title:'个人中心',
-				component:User
+				component:UserCenter
 			}
 		]
         return (
@@ -62,6 +62,7 @@ class Dashboard extends Component {
                         ))}
                    </Switch>
                </div>
+			   <NavLinkBar data={navList}/>
             </div>
         )
     }

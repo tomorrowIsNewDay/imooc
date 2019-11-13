@@ -24,7 +24,7 @@ export function user (state=initState, action){
         case types.LODA_ERROR:
             return {...state, isLogin: false, msg: action.msg}       
         case types.LOGOUT: 
-            return {...initState}   
+            return {...initState, redirectTo: '/login'}   
         default:
             return state    
     }
@@ -106,4 +106,9 @@ export function update(data) {
             console.warn(e)
         })
     }
+}
+
+/** 退出 */
+export function handleLogout(){
+    return {type: types.LOGOUT}
 }

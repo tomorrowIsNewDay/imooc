@@ -5,11 +5,11 @@ import { Redirect } from 'react-router-dom'
 import { AvatarSelector } from '@/component'
 import { NavBar, InputItem, TextareaItem, WhiteSpace, Button } from 'antd-mobile'
 
-// import { update } from '@/store/reducer/user'
+import { update } from '@/store/reducer/user'
 
 @connect(
     state=> state.user,
-    // { update }
+    { update }
 )
 class BossInfo extends React.Component {
     constructor(props){
@@ -34,7 +34,7 @@ class BossInfo extends React.Component {
 
     /** 保存 */
     handleSave() {
-        // this.props.update(this.state)
+        this.props.update(this.state)
     }
 
     render() {
