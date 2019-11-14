@@ -13,14 +13,15 @@ const types = {
     AUTH_SUCCESS: 'AUTH_SUCCESS',
     LOGOUT: "LOGOUT",
     LODA_ERROR: 'LODA_ERROR',
-    LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-    REGISTER_SUCCESS: 'REGISTER_SUCCESS',
+    LOAD_DATA: 'LOAD_DATA'
 }
 
 export function user (state=initState, action){
     switch(action.type){
         case types.AUTH_SUCCESS:
             return {...state, msg: '', redirectTo: getRedirectPatch(action.payload), ...action.payload}
+        case types.LOAD_DATA:
+            return { ...state, ...action.payload }
         case types.LODA_ERROR:
             return {...state, isLogin: false, msg: action.msg}       
         case types.LOGOUT: 
@@ -32,6 +33,10 @@ export function user (state=initState, action){
 //*****actions createrfn */
 export function emitErrorMsg(msg){
     return {type: types.LODA_ERROR, msg}
+}
+
+function loadData(info){
+    return {type: types.LOAD_DATA, payload: info}
 }
 
 // function loginSuccess(info){
@@ -104,6 +109,19 @@ export function update(data) {
             
         }).catch(e=>{
             console.warn(e)
+        })
+    }
+}
+
+/** 获取用户信息 */
+export function getUserInfo(){
+    return dispatch => {
+        http.get('/api/user/info').then(res => {
+            if(res.data.code === 0){
+                dispatch(loadData( res.data.data ))
+            }else{
+                dispatch(handleLogout())
+            }
         })
     }
 }

@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { handleLogout } from '@/store/reducer/user'
 import './style.css'
-import { Model } from 'mongoose'
 
 @connect(
     state => state.user,
@@ -19,7 +18,7 @@ class UserCenter extends Component {
     }
 
     emitLogout() {
-        const alert = Model.alert
+        const alert = Modal.alert
         alert('注销', '确认退出登录？', [
             {text: '取消', onPress: () => {console.log('cancel')}},
             {text: '确认', onPress: () => {
@@ -49,7 +48,7 @@ class UserCenter extends Component {
                 </List>
                 <WhiteSpace />
                 <List>
-					<Item onClick={this.emitLogout}>退出登录</Item>
+					<Item><div onClick={this.emitLogout}>退出登录</div></Item>
 				</List> 
             </div>
         ) : <Redirect to={props.redirectTo} />

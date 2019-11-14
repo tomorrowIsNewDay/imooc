@@ -21,11 +21,18 @@ const _createHash = function(password){
 } 
 /** 鉴权 */
  const getAuthInfo = async(ctx, next) => {
-     const {userId} = req.cookies
-     console.log(userId, 'cookiessss')
+    const cookies = ctx.request.headers.cookie
+    // 获取 cookie中的userId, 待优化，应使用token
+    let userId
+    try {
+        userId = cookies.split(';')[0].split('=')[1]
+    }catch(e){
+        
+    }
      if(!userId){
          ctx.body = {
-             code: 1
+             code: 1,
+             msg: '用户不存在'
          }
          return
      }
@@ -163,7 +170,7 @@ const _createHash = function(password){
     const body = ctx.request.body
     // 更新用户信息
     const data = await user_model.findByIdAndUpdate({'_id': userId}, body)
-    console.log(data, '3232', userId)
+
     if(!data){
         ctx.status = 500
         ctx.body = {
