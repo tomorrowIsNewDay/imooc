@@ -5,7 +5,7 @@ import store from './store'
 
 import './App.css';
 
-import { Dashboard, Login, Register, BossInfo, GeniusInfo } from './view'
+import { Dashboard, Login, Register, BossInfo, GeniusInfo, Chat } from './view'
 
 // 鉴权路由组件
 import { 
@@ -31,6 +31,7 @@ function App() {
             <Route path='/register' component={Register}/>
             <Route path='/bossinfo' component={BossInfo}></Route>
 					  <Route path='/geniusinfo' component={GeniusInfo}></Route>
+            <Route path='/chat/:user' component={Chat}></Route>
             <Route component={Dashboard}></Route>
             {/* <Route path='/:location' component={NotFound}/> */}
             {/* <Route path='/404' component={NotFound}/> */}
