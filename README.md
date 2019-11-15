@@ -19,7 +19,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 <div width="1200">
+登录页：
 <img src="./src/assets/imgs/login.jpeg" width="300" hegiht="500" />
+注册页：
 <img src="./src/assets/imgs/register.jpeg" width="300" hegiht="500" />
 <img src="./src/assets/imgs/geniusinfo.jpeg" width="300" hegiht="500" />
 <img src="./src/assets/imgs/list.jpeg" width="300" hegiht="500" />
