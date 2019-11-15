@@ -49,10 +49,10 @@ class Dashboard extends Component {
 		]
         return (
             <div>
-               <NavBar mode='dark'>
+               <NavBar className='fixd-header' mode='dark'>
                 {navList.find(v=>v.path === pathname).title}
                </NavBar>
-               <div>
+               <div style={{marginTop:45}}>
                    <Switch>
                         {navList.map(v => (
                             <Route key={v.path} 
