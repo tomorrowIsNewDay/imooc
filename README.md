@@ -18,7 +18,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
+<img src="./src/assets/imgs/login.jpeg" width="300" hegiht="500" />
 
+![avatar](./src/assets/imgs/me.jpeg )
 ### npm run eject
 弹出配置文件，可以自定义配置webpack，单向操作，不可逆
 
