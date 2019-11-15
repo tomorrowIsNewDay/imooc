@@ -32,7 +32,7 @@ class UserCenter extends Component {
         const Item = List.Item
         const Brief = Item.Brief
 
-        return props.user? (
+        return props.account? (
             <div>
                 <Result
                     img={<img src={require(`@/assets/avatars/${props.avatar}.png`)} style={{width: 50}} />}

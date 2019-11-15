@@ -28,7 +28,7 @@ class UserCard extends Component {
                         onClick={() => this.handleClick(v)}
                         >
                         <Header 
-                            title={v.user}
+                            title={v.account}
                             thumb={require(`@/assets/avatars/${v.avatar}.png`)}
                             extra={<span>{v.title}</span>}
                         />

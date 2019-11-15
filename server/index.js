@@ -9,7 +9,7 @@ const io = require('socket.io')(server)
 io.on('connection', (socket) => { 
     // io为全局
     // socket 为当前的
-    console.log(socket, 'socket.io')
+    // console.log(socket, 'socket.io')
     socket.on('sendmsg', function(data) {
         console.log(data, 'sendmsg')
         io.emit('recvmsg', data)

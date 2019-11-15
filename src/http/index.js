@@ -62,8 +62,16 @@ http.interceptors.request.use(config=>{
     if(!config.headers['Content-Type']) {
         config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     }
-    if(config.url !== '/login') {
-        config.headers['my_token'] = window.localStorage.getItem('my_token')
+
+    if(config.url !== '/api/login' && config.url !== '/api/register') {
+        const my_token = window.localStorage.getItem('my_token')
+        if(my_token) {
+            config.headers['my_token'] = my_token
+        }else{
+            window.location.href = '/login'
+            return
+        }
+        
     }
     if( config.method === 'get' || config.method === 'GET' ) {
         if (config.data) {

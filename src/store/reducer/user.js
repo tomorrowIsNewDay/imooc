@@ -47,8 +47,10 @@ function loadData(info){
 // 	return { type: types.REGISTER_SUCCESS, payload:data}
 // }
 
-function authSuccess(obj){
+function authSuccess(obj, token){
     const {password, ...data} = obj
+    token && window.localStorage.setItem('my_token', token)
+
     return { type: types.AUTH_SUCCESS, payload: data }
 }
 
@@ -65,7 +67,7 @@ export function regisger({account, password, repeatpwd, type}){
             {account, password, type})
                 .then(res => {
                 if(res.data.code === 0){
-                    dispatch( authSuccess(res.data.data) )
+                    dispatch( authSuccess(res.data.data, res.data.my_token) )
                 }else{
                     dispatch( emitErrorMsg(res.data.msg) )
                 }
@@ -84,7 +86,7 @@ export function login({account, password}){
             { account, password })
             .then(res=>{
             if(res.data.code === 0) {
-                dispatch(authSuccess(res.data.data))
+                dispatch(authSuccess(res.data.data, res.data.my_token))
             }else{
                 dispatch(emitErrorMsg(res.data.msg))
             }

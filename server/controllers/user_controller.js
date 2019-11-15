@@ -3,7 +3,7 @@
  * @description 控制器 用户
  */
  const crypto = require('crypto')
-
+ const tokenUtil = require('../utils/token')
  const user_model = require('../models/user.js')
 //  const pwd_model = require('../models/password.js')
 
@@ -100,10 +100,12 @@ const _createHash = function(password){
         return
     }
     ctx.status = 200
+    const my_token = tokenUtil.addToken({account:user.account, _id: user._id})
     ctx.cookies.set('userId', user._id)
     ctx.body = {
         code: 0,
-        data: user
+        data: user,
+        my_token
     }
  }
 
@@ -131,17 +133,18 @@ const _createHash = function(password){
         type,
         // _id,
      })
-     
+
      //插入成功
      if(newUser){
-        ctx.cookies.set('userId', newUser._id)
+        const my_token = tokenUtil.addToken({account:newUser.account, _id: newUser._id})
         ctx.body = {
             code: 0,
             msg: '注册成功',
+            my_token,
             data: {
                account: newUser.account,
-               type: newUser.password,
-               _id: newUser._id
+               type: newUser.type,
+               _id: newUser._id,
            }
         }
      }else{
@@ -158,15 +161,18 @@ const _createHash = function(password){
  const updateUser = async(ctx, next) => {
     const cookies = ctx.request.headers.cookie
     // 获取 cookie中的userId, 待优化，应使用token
-    const userId = cookies.split(';')[2].split('=')[1]
+    // const userId = cookies.split(';')[0].split('=')[1]
     
-    if(!userId){
+    const my_token = ctx.request.headers.my_token
+
+    if(!my_token){
         ctx.body = {
             code: 1,
             msg: 'not fond cookie'
         }
         return
     }
+    const userId = tokenUtil.docodToken(my_token).id
     const body = ctx.request.body
     // 更新用户信息
     const data = await user_model.findByIdAndUpdate({'_id': userId}, body)
