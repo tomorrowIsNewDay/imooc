@@ -15,7 +15,7 @@ class Chat extends Component {
         super(props)
         this.state = {
             text: '',
-            msg: []
+            // msg: []
         }
     }
 
@@ -42,8 +42,8 @@ class Chat extends Component {
     render() {
         return (
             <div>
-                { this.state.msg.map(v => (
-                    <p key={v}>{v}</p>
+                { this.props.chat.chatmsg.map(v => (
+                    <p key={v._id}>{v.content}</p>
                 )) }
                 <div className='stick-footer'>
                     <List>
