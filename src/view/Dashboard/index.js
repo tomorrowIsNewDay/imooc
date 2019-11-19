@@ -15,9 +15,9 @@ class Dashboard extends Component {
     componentDidMount() {
 		// 避免重复调用接口
 		if(!this.props.chat.chatmsg.length) {
-            this.props.getMsgList()
+			this.props.getMsgList()
+			this.props.recvMsg()
 		}
-		this.props.recvMsg()
 	}
     
     render() {

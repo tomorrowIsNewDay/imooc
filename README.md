@@ -21,6 +21,7 @@
 <img src="./src/assets/imgs/bosslit.jpeg" width="300" hegiht="500" />
 <img src="./src/assets/imgs/me.jpeg" width="300" hegiht="500" />
 <img src="./src/assets/imgs/logout.jpeg" width="300" hegiht="500" />
+<img src="./src/assets/imgs/chat.jpg" width="300" hegiht="500" />
 </div>
 
 

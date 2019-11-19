@@ -54,9 +54,9 @@ export function sendMsg({from, to, msg}) {
 /**接受信息 */
 export function recvMsg() {
     return (dispatch, getState) => {
-        const userid = getState().user._id // 获取当前的state
-        console.log(userid, 'dddddd')
         socket.on('recvmsg', function(data) {
+            const userid = getState().user._id  //获取当前的state 要放在这里，不能放外层，会获取不到
+            // console.log(userid, 'dddddd', getState())
             dispatch(emitRecvMsg( data, userid ))
         })
     }
