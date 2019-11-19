@@ -30,8 +30,8 @@ class Chat extends Component {
         // 避免当前页刷新后无数据
         if(!this.props.chat.chatmsg.length) {
             this.props.getMsgList()
-            this.props.recvMsg()
         }
+        this.props.recvMsg()
    }
 
    handleSend() {
