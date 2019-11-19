@@ -21,14 +21,16 @@ const _createHash = function(password){
 } 
 /** 鉴权 */
  const getAuthInfo = async(ctx, next) => {
-    const cookies = ctx.request.headers.cookie
-    // 获取 cookie中的userId, 待优化，应使用token
-    let userId
-    try {
-        userId = cookies.split(';')[0].split('=')[1]
-    }catch(e){
+    // const cookies = ctx.request.headers.cookie
+    // // 获取 cookie中的userId, 待优化，应使用token
+    // let userId
+    // try {
+    //     userId = cookies.split(';')[0].split('=')[1]
+    // }catch(e){
         
-    }
+    // }
+    const my_token = ctx.request.headers.my_token
+    const userId = tokenUtil.docodToken(my_token).id
      if(!userId){
          ctx.body = {
              code: 1,

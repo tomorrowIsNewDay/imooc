@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 
-import { List, InputItem } from 'antd-mobile'
+import { List, InputItem, NavBar, Icon } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { getMsgList, sendMsg, recvMsg } from '@/store/reducer/chat' 
+import { sendMsg, getMsgList, recvMsg } from '@/store/reducer/chat' 
+import { getChatId } from '../../utils'
 // import io from 'socket.io-client'
 // const socket = io('ws://localhost:1818')
 
 @connect(
     state => state,
-    {getMsgList, sendMsg, recvMsg}
+    { sendMsg, getMsgList, recvMsg }
 )
 class Chat extends Component {
     constructor(props) {
@@ -26,8 +27,11 @@ class Chat extends Component {
         //         msg: [...this.state.msg, data.text]
         //     })
         // })
-        this.props.getMsgList()
-        this.props.recvMsg()
+        // 避免当前页刷新后无数据
+        if(!this.props.chat.chatmsg.length) {
+            this.props.getMsgList()
+            this.props.recvMsg()
+        }
    }
 
    handleSend() {
@@ -40,11 +44,33 @@ class Chat extends Component {
    }
 
     render() {
+        const userId = this.props.match.params.user
+        const users = this.props.chat.users
+        const Item = List.Item
+
+        if(!users[userId]) return null
+        const currentChatid = getChatId(userId, this.props.user._id)
+        const chatmsg = this.props.chat.chatmsg.filter(v => v.chatid === currentChatid)
         return (
-            <div>
-                { this.props.chat.chatmsg.map(v => (
-                    <p key={v._id}>{v.content}</p>
-                )) }
+            <div id='chat-page'>
+                <NavBar mode='dark' 
+                    leftContent={<Icon type='left'/>} 
+                    onLeftClick={() => this.props.history.goBack()}>
+                    { users[userId].name }
+                </NavBar>
+                { chatmsg.map(v => {
+                  const avatar = require(`@/assets/avatars/${users[v.from].avatar}.png`)
+                  return v.from === userId ? 
+                    <List key={v._id}>
+                        <Item thumb={avatar}>{v.content}</Item>
+                    </List> :
+                    <List key={v._id}>
+                        <Item className='chat-me' 
+                            extra={<img src={avatar} />}>
+                            {v.content}
+                        </Item>
+                    </List>
+                }) }
                 <div className='stick-footer'>
                     <List>
                         <InputItem

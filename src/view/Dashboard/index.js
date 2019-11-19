@@ -3,14 +3,22 @@ import { connect } from 'react-redux'
 // import './style.css'
 import { Route, Switch } from 'react-router-dom'
 import { NavBar } from 'antd-mobile'
+import { getMsgList, recvMsg } from '@/store/reducer/chat' 
 
 import { Boss, Genius, UserCenter, Msg, NavLinkBar } from '@/component'
 
 @connect(
-    state => state
+	state => state,
+	{getMsgList, recvMsg}
 )
 class Dashboard extends Component {
-    
+    componentDidMount() {
+		// 避免重复调用接口
+		if(!this.props.chat.chatmsg.length) {
+            this.props.getMsgList()
+            this.props.recvMsg()
+        }
+	}
     
     render() {
         const { pathname } = this.props.location

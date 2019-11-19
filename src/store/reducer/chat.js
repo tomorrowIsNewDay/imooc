@@ -4,6 +4,7 @@ const socket = io('ws://localhost:1818')
 
 const initState = {
     chatmsg: [],
+    users: {}, // 用户字典表
     unread: 0
 }
 
@@ -21,7 +22,7 @@ const types = {
 export function chat(state=initState, action){
     switch(action.type){
         case types.FETCH_MSG_LIST:
-            return {...state, chatmsg: action.payload, unread: action.payload.filter(v => !v.read).length}
+            return {...state, users: action.payload.users, chatmsg: action.payload.msgs, unread: action.payload.msgs.filter(v => !v.read).length}
         case types.MSG_RECV:
             return {...state, chatmsg: [...state.chatmsg, action.payload], unread: state.unread + 1}
         case types.MSG_READ:    

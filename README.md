@@ -5,7 +5,7 @@
 ### 服务端
 #### koa2 + socket.io + monogodb ＋ jsonwebtoken
 ### 客户端
-#### react + react-redux + redux + react-router 4.x ＋ axios + socket.io-client
+#### react + react-redux + redux + react-router 4.x ＋ axios + socket.io-client + antd-mobile
 
 ### 项目启动
 1.安装依赖：`yarn install`
