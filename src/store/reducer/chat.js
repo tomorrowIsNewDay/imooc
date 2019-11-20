@@ -29,7 +29,8 @@ export function chat(state=initState, action){
             const count = action.payload.data.to === action.payload.userid ? 1 : 0
             return {...state, chatmsg: [...state.chatmsg, action.payload.data], unread: state.unread + count}
         case types.MSG_READ:    
-            return {...state, chatmsg: state.chatmsg.map(v => ({...v, read: true})), unread: state.unread - action.payload.num}
+            const { from , to, num } = action.payload
+            return {...state, chatmsg: state.chatmsg.map(v => ({...v, read: from === v.from ? true : v.read})), unread: state.unread - num}
         default: 
             return state    
     }
@@ -72,7 +73,7 @@ export function readMsg(from) {
             .then(res => {
                 if(res.data.code == 0){
                     const userid = getState().user._id // 获取当前的state
-                    dispatch(emitReadMsg( {from, userid, num: res.data.data} ))
+                    dispatch(emitReadMsg( {from, userid, num: res.data.data.num} ))
                 }
             })
     }
