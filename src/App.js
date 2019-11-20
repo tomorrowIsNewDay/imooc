@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux' 
 import store from './store'
 
@@ -34,8 +34,7 @@ function App() {
             <Route path='/chat/:user' component={Chat}></Route>
             <Route component={Dashboard}></Route>
             {/* <Route path='/:location' component={NotFound}/> */}
-            {/* <Route path='/404' component={NotFound}/> */}
-            <Redirect to='/login'/>
+            {/* <Route path='/404' component={NotFound}/> */}     
           </Switch>
         </BrowserRouter>
       </Provider>

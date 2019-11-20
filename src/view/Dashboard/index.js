@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import './style.css'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { NavBar } from 'antd-mobile'
 import { getMsgList, recvMsg } from '@/store/reducer/chat' 
 
@@ -58,7 +58,7 @@ class Dashboard extends Component {
         return (
             <div>
                <NavBar className='fixd-header' mode='dark'>
-                {navList.find(v=>v.path === pathname).title}
+                {navList.find(v=>v.path === pathname) && navList.find(v=>v.path === pathname).title}
                </NavBar>
                <div style={{marginTop:45}}>
                    <Switch>
@@ -68,6 +68,7 @@ class Dashboard extends Component {
                                    component={v.component} 
                               />
                         ))}
+						<Redirect to='/login'/>
                    </Switch>
                </div>
 			   <NavLinkBar data={navList}/>
