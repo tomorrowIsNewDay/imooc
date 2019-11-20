@@ -40,7 +40,7 @@ class Msg extends Component {
                    { chatList.map(v => {
                     const lastItem = this.getLast(v)
                     // 统计未读信息
-                    const unreadNum = v.filter(t => !t.reader && t.to === userid).length
+                    const unreadNum = v.filter(t => !t.read && t.to === userid).length
                     const targetId = v[0].from === userid ? v[0].to : v[0].from
                     if(!allUsers[targetId]) return null
                     return (

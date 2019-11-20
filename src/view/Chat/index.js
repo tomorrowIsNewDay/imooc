@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { sendMsg, getMsgList, recvMsg } from '@/store/reducer/chat' 
+import { sendMsg, getMsgList, recvMsg, readMsg } from '@/store/reducer/chat' 
 import { getChatId } from '../../utils'
 // import io from 'socket.io-client'
 // const socket = io('ws://localhost:1818')
 
 @connect(
     state => state,
-    { sendMsg, getMsgList, recvMsg }
+    { sendMsg, getMsgList, recvMsg, readMsg }
 )
 class Chat extends Component {
     constructor(props) {
@@ -34,6 +34,12 @@ class Chat extends Component {
             this.props.recvMsg()
         }
         this.fixCarousel()      
+   }
+
+   componentWillUnmount() {
+       // 目标聊天对象
+       const to = this.props.match.params.user
+       this.props.readMsg(to)
    }
 
    fixCarousel() {

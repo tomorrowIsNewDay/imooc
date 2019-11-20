@@ -29,7 +29,7 @@ export function chat(state=initState, action){
             const count = action.payload.data.to === action.payload.userid ? 1 : 0
             return {...state, chatmsg: [...state.chatmsg, action.payload.data], unread: state.unread + count}
         case types.MSG_READ:    
-            return
+            return {...state, chatmsg: state.chatmsg.map(v => ({...v, read: true})), unread: state.unread - action.payload.num}
         default: 
             return state    
     }
@@ -42,6 +42,10 @@ function emitmsglist(data, userid){
 
 function emitRecvMsg(data, userid) {
     return {type: types.MSG_RECV, payload: {data, userid}}
+}
+
+function emitReadMsg({from, userid, num}) {
+    return {type: types.MSG_READ, payload: {from, userid, num}}
 }
 
 /**发送信息 */
@@ -59,6 +63,18 @@ export function recvMsg() {
             // console.log(userid, 'dddddd', getState())
             dispatch(emitRecvMsg( data, userid ))
         })
+    }
+}
+/** 读取信息 */
+export function readMsg(from) {
+    return (dispatch, getState) => {
+        http.post('/api/user/readmsg', {from})
+            .then(res => {
+                if(res.data.code == 0){
+                    const userid = getState().user._id // 获取当前的state
+                    dispatch(emitReadMsg( {from, userid, num: res.data.data} ))
+                }
+            })
     }
 }
 

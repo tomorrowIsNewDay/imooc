@@ -35,7 +35,7 @@ function App() {
             <Route component={Dashboard}></Route>
             {/* <Route path='/:location' component={NotFound}/> */}
             {/* <Route path='/404' component={NotFound}/> */}
-            {/* <Redirect to='/404'/> */}
+            <Redirect to='/login'/>
           </Switch>
         </BrowserRouter>
       </Provider>

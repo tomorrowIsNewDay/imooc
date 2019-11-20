@@ -13,6 +13,7 @@ const chat_controller = require('../controllers/chat_controller')
 router.post('/api/login', user_controller.login)
 router.post('/api/register', user_controller.register)
 router.post('/api/user/update', user_controller.updateUser)
+router.post('/api/user/readmsg', chat_controller.readMsg)
 
 //test
 router.get('/api/list', user_controller.getList)
