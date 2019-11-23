@@ -6,6 +6,7 @@ import { sendMsg, getMsgList, recvMsg, readMsg } from '@/store/reducer/chat'
 import { getChatId } from '../../utils'
 // import io from 'socket.io-client'
 // const socket = io('ws://localhost:1818')
+import QueueAnim from 'rc-queue-anim'
 
 @connect(
     state => state,
@@ -76,6 +77,7 @@ class Chat extends Component {
                     onLeftClick={() => this.props.history.goBack()}>
                     { users[userId].name }
                 </NavBar>
+                <QueueAnim delay={100}>
                 { chatmsg.map(v => {
                   const avatar = require(`@/assets/avatars/${users[v.from].avatar}.png`)
                   return v.from === userId ? 
@@ -89,6 +91,7 @@ class Chat extends Component {
                         </Item>
                     </List>
                 }) }
+                </QueueAnim>
                 <div className='stick-footer'>
                     <List>
                         <InputItem
@@ -110,7 +113,7 @@ class Chat extends Component {
                                 </span>
                                 <span onClick={()=>this.handleSend()}>发送</span>
                             </div>}
-                        >信息</InputItem>
+                        ></InputItem>
                     </List>
                     { this.state.showEmoji ? 
                         <Grid 

@@ -217,3 +217,23 @@ const thunk = ({getState, dispatch}) => next => action => {
 }
 ```
 
+### React 优化
+#### React组件优化
+    - 属性传递
+    - 多组件优化
+        只要父组件render()重新渲染，内部的所有子孙组件都会重新更新，无论其值有无变化
+        localhost:3000?react_pref 结合控制台中performance使用，性能优化检查分析工具
+        shouldComponentUpdate(nextProps, nextState) / React.PureComponent 浅层对比props,有无变化，定制shouldComponentUpdate
+        immutable 不可变数据，只能生成新的数据， 减少内存使用，并发安全，但对现有项目入侵性高
+        seamless-immutable库体积小，简化版
+    - redux 性能优化
+        reselect库 类似vuex中getter,计算值，有缓存
+    - key
+        diff算法中 可以根据key值sameVnode对比，VNode可以复用
+
+#### React动画
+    - ReactCSSTransitionGroup
+    - Ant Motion 库
+
+#### 打包编译
+    yarn build

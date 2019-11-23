@@ -1,4 +1,5 @@
 import React from 'react';
+import { Map, is } from 'immutable'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux' 
 import store from './store'
