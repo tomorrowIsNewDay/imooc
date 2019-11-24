@@ -10,6 +10,7 @@
     "@typescript-eslint/parser": "^2.2.0",
     "antd-mobile": "^2.4.0-beta.0",
     "axios": "^0.19.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.0.6",
@@ -43,6 +44,7 @@
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "mini-css-extract-plugin": "0.8.0",
     "mongoose": "^5.7.8",
     "optimize-css-assets-webpack-plugin": "5.0.3",
@@ -83,7 +85,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "server": "nodemon --exec babel-node server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -151,26 +154,6 @@
     "watchPlugins": [
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "plugins": [
-      [
-        "import",
-        {
-          "libraryName": "antd-mobile",
-          "style": "css"
-        }
-      ],
-      [
-        "@babel/plugin-proposal-decorators",
-        {
-          "legacy": true
-        }
-      ]
     ]
   },
   "proxy": "http://localhost:1818"

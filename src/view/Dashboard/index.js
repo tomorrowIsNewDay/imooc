@@ -68,7 +68,7 @@ class Dashboard extends Component {
                                    component={v.component} 
                               />
                         ))}
-						<Redirect to='/login'/>
+						<Redirect to='/msg'/>
                    </Switch>
                </div>
 			   <NavLinkBar data={navList}/>

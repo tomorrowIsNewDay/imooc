@@ -237,3 +237,18 @@ const thunk = ({getState, dispatch}) => next => action => {
 
 #### 打包编译
     yarn build
+
+#### SSR
+    - yarn add babel-cli 让服务器端支持es6 等语法
+    - 配置.babelrc文件 让服务器端支持jsx
+    - import { renderToString } from 'react-dom/server'
+    - 插入css 有钩子插件
+    - 使用public中的index.html架子，引入mainfist.json中的文件（css, js）地址,  发送给前台， 可以在html结构中设置tittle,keyWords。。。 做SEO优化
+
+#### React16新特性
+    - Fiber算法
+    - Render可以返回数组，字符串
+    - 错误处理机制 根组件设置componentDidCatch(err, info)，捕捉全局错误
+    - Portals组件
+    - renderToNodeStream 更好的服务端渲染 hydrate()替换 render()
+    - 体积更小，MIT协议，完全开源
