@@ -242,6 +242,7 @@ const thunk = ({getState, dispatch}) => next => action => {
     - yarn add babel-cli 让服务器端支持es6 等语法
     - 配置.babelrc文件 让服务器端支持jsx
     - import { renderToString } from 'react-dom/server'
+    - 同构服务端
     - 插入css 有钩子插件
     - 使用public中的index.html架子，引入mainfist.json中的文件（css, js）地址,  发送给前台， 可以在html结构中设置tittle,keyWords。。。 做SEO优化
 
