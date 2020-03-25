@@ -15,6 +15,12 @@
 ### 项目总结
 详情见 ./React总结.md
 
+### 项目结构图
+<div width="1200">
+  <img src="./src/assets/imgs/server.jpg"  hegiht="500" />
+  <img src="./src/assets/imgs/client.jpg"  hegiht="500" />
+</div>  
+
 ### 项目预览
 <div width="1200">
 <img src="./src/assets/imgs/login.jpeg" width="300" hegiht="500" />
