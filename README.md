@@ -12,6 +12,9 @@
 2.启动：`yarn start`
 3.打包：`yarn build`
 
+### 项目总结
+详情 见./React总结.md
+
 ### 项目预览
 <div width="1200">
 <img src="./src/assets/imgs/login.jpeg" width="300" hegiht="500" />
